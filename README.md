@@ -1,6 +1,6 @@
-# Exemplo de como rodar uma aplicação django utilizando poetry e um container docker.
+## Exemplo de como rodar uma aplicação django utilizando poetry e um container docker.
 
-# Comandos úteis Poetry
+#### Comandos úteis Poetry
 
 ```python
   
@@ -18,5 +18,13 @@
   
   #como criar um app django com o poetry
   poetry run python manage.py startapp example
+```
+
+## como rodar com o docker
+```bash
+# para buildar e subir.
+sudo docker-compose up -d --build
+# para ver os logs
+sudo docker-compose logs -f
 ```
 
