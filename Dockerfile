@@ -1,6 +1,7 @@
 FROM python:3.10-alpine
 
 #Copy project
+RUN mkdir app/ && cd ./app
 WORKDIR /app
 COPY . .
 
@@ -10,7 +11,7 @@ ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
 #install dependencies
-RUN apk add --update --no-cache --virtual .tmp-build-deps \
+RUN apk add --update --virtual .tmp-build-deps \
     gcc libc-dev linux-headers postgresql-dev \
     && apk add libffi-dev
 
@@ -23,6 +24,4 @@ RUN poetry config virtualenvs.create false
 RUN poetry install $(test "$YOUR_ENV" == production && echo "--no-dev")
 
 # run
-CMD ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
-# RUN chmod +x ./entrypoint.sh
-# ENTRYPOINT ['./entrypoint.sh']
+ENTRYPOINT ["./entrypoint.sh"]
